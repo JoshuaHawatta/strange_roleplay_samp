@@ -1,13 +1,12 @@
 "use client";
 
-import { ChakraBaseProvider, extendBaseTheme } from "@chakra-ui/react";
-
-const theme = extendBaseTheme({});
+import Toast from "./Toast";
 
 const AppContainer = ({ children }: { children: React.ReactNode }) => (
-  <ChakraBaseProvider theme={theme}>
+  <>
+    <Toast />
     <main className='mx-8 md:mx-32 flex flex-col'>{children}</main>
-  </ChakraBaseProvider>
+  </>
 );
 
 export default AppContainer;

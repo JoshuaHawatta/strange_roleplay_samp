@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, UserPlus } from "lucide-react";
+import { Check, Eye, EyeOff, UserPlus } from "lucide-react";
 import Button from "../../../components/Button/Root";
 import Input from "../../../components/Input/Root";
 import { Event } from "../../../components/Input/Index";
+import Toast from "../../../components/Toast";
+import useToastStore from "../../../stores/toast";
 
 export type SignInProps = Partial<{
   name: string;
@@ -16,11 +18,16 @@ export type SignInProps = Partial<{
 const SignIn = () => {
   const [inputValues, setInputValues] = useState<SignInProps>({});
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const showToast = useToastStore(state => state.showToast);
 
   const handleInputValues = (event: Event) => {
     const { name, value } = event.target;
 
     setInputValues(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSignIn = () => {
+    showToast({ message: "Texto aqui" });
   };
 
   return (
@@ -71,7 +78,7 @@ const SignIn = () => {
       </Input.Container>
 
       <section className='flex items-center my-4 justify-center w-3/6'>
-        <Button.Container onClick={() => {}}>
+        <Button.Container onClick={handleSignIn}>
           <Button.Icon icon={UserPlus} />
           <Button.Text content='Cadastrar' />
         </Button.Container>
