@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Eye, EyeOff, UserPlus } from "lucide-react";
+import { Eye, EyeOff, UserPlus } from "lucide-react";
 import Button from "../../../components/Button/Root";
 import Input from "../../../components/Input/Root";
 import { Event } from "../../../components/Input/Index";
-import Toast from "../../../components/Toast";
 import useToastStore from "../../../stores/toast";
 
 export type SignInProps = Partial<{
