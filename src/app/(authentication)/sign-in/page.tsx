@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Eye, EyeOff, RefreshCw, UserPlus } from "lucide-react";
+import { useState } from "react";
+import { Check, Eye, EyeOff, RefreshCw, UserPlus } from "lucide-react";
 import Button from "../../../components/Button/Root";
 import Input from "../../../components/Input/Root";
 import { Event } from "../../../components/Input/Index";
 import useToastStore from "../../../stores/toast";
 import Curtain from "../../../components/Curtain";
 import { useRouter } from "next/navigation";
+import useUserStore from "../../../stores/user";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 export type SignInProps = Partial<{
   name: string;
@@ -21,7 +23,9 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
   const { showToast } = useToastStore(state => state);
+  const { setUserData } = useUserStore();
   const { push } = useRouter();
+  const { set } = useLocalStorage();
 
   const handleInputValues = (event: Event) => {
     const { name, value } = event.target;
@@ -30,9 +34,10 @@ const SignIn = () => {
   };
 
   const handleSignIn = () => {
-    showToast({ message: "Texto aqui" });
-
     setIsLoading(true);
+    showToast({ message: "Cadastro realizado com sucesso", icon: Check, type: "success" });
+    set({ key: "user", item: { id: 1, name: inputValues.name, token: `ey${Date.now()}` } });
+    setUserData({ id: 1, name: inputValues.email as string, token: `ey${Date.now()}` });
     setTimeout(() => push("/login"), 6000);
   };
 

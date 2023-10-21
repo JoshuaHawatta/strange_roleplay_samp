@@ -1,15 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, LogIn, RefreshCw } from "lucide-react";
+import { Check, Eye, EyeOff, LogIn, RefreshCw } from "lucide-react";
 import Button from "../../../components/Button/Root";
 import Input from "../../../components/Input/Root";
 import { Event } from "../../../components/Input/Index";
 import useToastStore from "../../../stores/toast";
 import Curtain from "../../../components/Curtain";
+import useUserStore from "../../../stores/user";
+import useLocalStorage from "../../../hooks/useLocalStorage";
+import { useRouter } from "next/navigation";
 
 export type LoginPageProps = Partial<{
-  email: string;
+  name: string;
   password: string;
   confirmPassword: string;
 }>;
@@ -18,7 +21,10 @@ const LoginPage = () => {
   const [inputValues, setInputValues] = useState<LoginPageProps>({});
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
-  const showToast = useToastStore(state => state.showToast);
+  const { showToast } = useToastStore(state => state);
+  const { setUserData } = useUserStore();
+  const { set } = useLocalStorage();
+  const { push } = useRouter();
 
   const handleInputValues = (event: Event) => {
     const { name, value } = event.target;
@@ -27,8 +33,11 @@ const LoginPage = () => {
   };
 
   const handleLogin = () => {
-    showToast({ message: "Texto aqui" });
     setIsLoading(true);
+    showToast({ message: "Login realizado com sucesso", icon: Check, type: "success" });
+    set({ key: "user", item: { id: 1, name: inputValues.name, token: `ey${Date.now()}` } });
+    setUserData({ id: 1, name: inputValues.name as string, token: `ey${Date.now()}` });
+    push("/");
   };
 
   return (
@@ -39,13 +48,13 @@ const LoginPage = () => {
           <h4 className='text-2xl md:text-4xl font-semibold'>Login</h4>
         </section>
 
-        <Input.Container label='E-mail' htmlFor='email'>
+        <Input.Container label='Nome de usuário' htmlFor='name'>
           <Input.Index
-            id='email'
-            name='email'
+            id='name'
+            name='name'
             onChange={handleInputValues}
-            type='email'
-            value={inputValues.email || ""}
+            type='text'
+            value={inputValues.name || ""}
           />
         </Input.Container>
 

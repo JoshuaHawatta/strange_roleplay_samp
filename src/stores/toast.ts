@@ -6,7 +6,7 @@ type ToastType = "success" | "info" | "warning" | "error";
 
 type ShowToastProps = {
   message: string;
-  Icon?: ElementType;
+  icon?: ElementType;
   type?: ToastType;
   duration?: number;
 };
@@ -17,7 +17,7 @@ type ToastState = {
   Icon: ElementType;
   type: ToastType;
   duration?: number;
-  showToast: ({ message, Icon, type, duration }: ShowToastProps) => void;
+  showToast: ({ message, icon, type, duration }: ShowToastProps) => void;
   hideToast: () => void;
 };
 
@@ -28,7 +28,7 @@ const useToastStore = create<ToastState>(set => ({
   type: "info",
   duration: 5000,
 
-  showToast: ({ message, Icon = Info, type = "info", duration = 5000 }) =>
+  showToast: ({ message, icon: Icon = Info, type = "info", duration = 5000 }) =>
     set({
       visible: true,
       message,

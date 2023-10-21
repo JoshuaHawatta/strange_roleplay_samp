@@ -1,20 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, LogIn, RefreshCw, Send } from "lucide-react";
+import { RefreshCw, Send } from "lucide-react";
 import Button from "../../../components/Button/Root";
 import Input from "../../../components/Input/Root";
 import { Event } from "../../../components/Input/Index";
 import useToastStore from "../../../stores/toast";
-import Curtain from "../../../components/Curtain";
 
-export type LoginPageProps = Partial<{
-  email: string;
-}>;
+export type RecoverPasswordPageProps = Partial<{ email: string }>;
 
-const LoginPage = () => {
-  const [inputValues, setInputValues] = useState<LoginPageProps>({});
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+const RecoverPasswordPage = () => {
+  const [inputValues, setInputValues] = useState<RecoverPasswordPageProps>({});
   const [isLoading, setIsLoading] = useState(false);
   const showToast = useToastStore(state => state.showToast);
 
@@ -61,4 +57,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RecoverPasswordPage;
