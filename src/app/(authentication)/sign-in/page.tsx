@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { Eye, EyeOff, UserPlus } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Eye, EyeOff, RefreshCw, UserPlus } from "lucide-react";
 import Button from "../../../components/Button/Root";
 import Input from "../../../components/Input/Root";
 import { Event } from "../../../components/Input/Index";
 import useToastStore from "../../../stores/toast";
 import Curtain from "../../../components/Curtain";
+import { useRouter } from "next/navigation";
 
 export type SignInProps = Partial<{
   name: string;
@@ -18,7 +19,9 @@ export type SignInProps = Partial<{
 const SignIn = () => {
   const [inputValues, setInputValues] = useState<SignInProps>({});
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const showToast = useToastStore(state => state.showToast);
+  const [isLoading, setIsLoading] = useState(false);
+  const { showToast } = useToastStore(state => state);
+  const { push } = useRouter();
 
   const handleInputValues = (event: Event) => {
     const { name, value } = event.target;
@@ -28,6 +31,9 @@ const SignIn = () => {
 
   const handleSignIn = () => {
     showToast({ message: "Texto aqui" });
+
+    setIsLoading(true);
+    setTimeout(() => push("/login"), 6000);
   };
 
   return (
@@ -85,8 +91,8 @@ const SignIn = () => {
 
         <section className='flex items-center my-4 justify-center w-3/6'>
           <Button.Container onClick={handleSignIn}>
-            <Button.Icon icon={UserPlus} />
-            <Button.Text content='Cadastrar' />
+            <Button.Icon styles={isLoading ? "animate-spin" : ""} icon={!isLoading ? UserPlus : RefreshCw} />
+            <Button.Text content={!isLoading ? "Cadastrar" : ""} />
           </Button.Container>
         </section>
 

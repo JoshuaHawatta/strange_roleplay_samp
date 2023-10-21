@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, LogIn } from "lucide-react";
+import { Eye, EyeOff, LogIn, RefreshCw } from "lucide-react";
 import Button from "../../../components/Button/Root";
 import Input from "../../../components/Input/Root";
 import { Event } from "../../../components/Input/Index";
@@ -17,6 +17,7 @@ export type LoginPageProps = Partial<{
 const LoginPage = () => {
   const [inputValues, setInputValues] = useState<LoginPageProps>({});
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const showToast = useToastStore(state => state.showToast);
 
   const handleInputValues = (event: Event) => {
@@ -27,6 +28,7 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     showToast({ message: "Texto aqui" });
+    setIsLoading(true);
   };
 
   return (
@@ -63,14 +65,20 @@ const LoginPage = () => {
 
         <section className='flex items-center my-4 justify-center w-3/6'>
           <Button.Container onClick={handleLogin}>
-            <Button.Icon icon={LogIn} />
-            <Button.Text content='Entrar' />
+            <Button.Icon styles={isLoading ? "animate-spin" : ""} icon={!isLoading ? LogIn : RefreshCw} />
+            <Button.Text content={!isLoading ? "Entrar" : ""} />
           </Button.Container>
         </section>
 
         <section className='flex items-center justify-center w-3/6'>
           <a href='/sign-in' className='text-blue-600'>
             Não tenho conta
+          </a>
+        </section>
+
+        <section className='flex items-center justify-center w-3/6'>
+          <a href='/recover-password' className='text-blue-600'>
+            Esqueci minha senha
           </a>
         </section>
       </form>
