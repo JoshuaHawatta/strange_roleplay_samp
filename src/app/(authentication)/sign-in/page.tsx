@@ -45,7 +45,7 @@ const SignIn = () => {
     <>
       <Curtain />
 
-      <form className='flex flex-col gap-4 mt-32 m-auto py-10 items-center justify-between bg-cyan-200 h-3/4 w-full md:w-3/6 rounded-md'>
+      <form className='flex flex-col gap-4 m-auto py-10 items-center justify-between bg-cyan-200 h-3/4 w-full md:w-3/6 rounded-md'>
         <section className='flex items-center justify-center w-full'>
           <h4 className='text-2xl md:text-4xl font-semibold'>Cadastrar</h4>
         </section>

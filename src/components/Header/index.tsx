@@ -20,7 +20,7 @@ const Header = () => {
   if (!token) return;
 
   return (
-    <header className='px-8 flex justify-between items-center w-full bg-cyan-500 h-20'>
+    <header className='px-8 mb-32 flex justify-between items-center w-full bg-cyan-500 h-20'>
       <div className='flex items-center text-center justify-center w-full'>
         <h5 className='text-xl md:text-4xl font-bold w-5/6 text-white uppercase'>Logo aqui</h5>
       </div>
