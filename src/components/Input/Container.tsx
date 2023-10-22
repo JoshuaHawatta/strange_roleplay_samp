@@ -12,7 +12,7 @@ const InputContainer = ({ children, htmlFor, label, labelStyle, containerStyle }
   >
     <label
       htmlFor={htmlFor}
-      className={`text-sm md:text-base px-4 md:px-0 pb-1 ${mergeStyles("mb-2 text-cyan-800", labelStyle)}`}
+      className={`${mergeStyles("mb-2 text-cyan-800 text-sm md:text-base px-4 md:px-0 pb-1", labelStyle)}`}
     >
       {label}
     </label>
