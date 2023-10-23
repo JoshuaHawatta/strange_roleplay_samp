@@ -22,9 +22,14 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
   const { showToast } = useToastStore(state => state);
-  const { setUserData } = useUserStore();
+  const { setUserData, name } = useUserStore();
   const { set } = useLocalStorage();
   const { push } = useRouter();
+
+  const [formWithoutMargin, formWithMargin] = [
+    "flex flex-col gap-4 m-auto py-10 items-center justify-between bg-cyan-200 h-3/4 w-full md:w-3/6 rounded-md",
+    "flex flex-col gap-4 m-auto mt-20 py-10 items-center justify-between bg-cyan-200 h-3/4 w-full md:w-3/6 rounded-md",
+  ];
 
   const handleInputValues = (event: Event) => {
     const { name, value } = event.target;
@@ -43,7 +48,7 @@ const LoginPage = () => {
   return (
     <>
       <Curtain />
-      <form className='flex flex-col gap-4 m-auto py-10 items-center justify-between bg-cyan-200 h-3/4 w-full md:w-3/6 rounded-md'>
+      <form className={name ? formWithoutMargin : formWithMargin}>
         <section className='flex items-center justify-center w-full'>
           <h4 className='text-2xl md:text-4xl font-semibold'>Login</h4>
         </section>
