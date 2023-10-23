@@ -11,7 +11,7 @@ const config: Config = {
       height: { "half": "50vh" },
       keyframes: {
         "open-curtain": {
-          "0%": { width: "100%" },
+          "0%": { width: "50%" },
           "100%": { width: "0%", display: "hidden" },
         },
         "curtain-message": {
